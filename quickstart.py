@@ -19,25 +19,16 @@ insta_password = ''
 session = InstaPy(username=insta_username,
                   password=insta_password,
                   headless_browser=False,
-                  multi_logs=True)
+                  nogui=True)
 
 try:
     session.login()
 
     # settings
-    session.set_relationship_bounds(enabled=True,
-				 potency_ratio=-1.21,
-				  delimit_by_numbers=True,
-				   max_followers=4590,
-				    max_following=5555,
-				     min_followers=45,
-				      min_following=77)
-    session.set_do_comment(True, percentage=10)
-    session.set_comments(['aMEIzing!', 'So much fun!!', 'Nicey!'])
-    session.set_dont_include(['friend1', 'friend2', 'friend3'])
-    session.set_dont_like(['pizza', 'girl'])
 
     # actions
+    session.unfollow_users(amount=10, onlyInstapyFollowed = True, onlyInstapyMethod = 'FIFO', sleep_delay=600, unfollow_after=48*60*60)
+    session.follow_by_tags(['tag1', 'tag2'], amount=10)
     session.like_by_tags(['natgeo'], amount=1)
 
 except Exception as exc:
